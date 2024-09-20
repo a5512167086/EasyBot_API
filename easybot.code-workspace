@@ -1,0 +1,45 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "src/bot-service"
+    },
+    {
+      "path": "src/auth-service"
+    },
+    {
+      "path": "src/ecomm-service"
+    },
+    {
+      "path": "src/qa-service"
+    },
+    {
+      "path": "src/web-app"
+    },
+    {
+      "path": "src/api-gateway"
+    }
+  ],
+  "settings": {
+    "src/bot-service": {
+      "python.pythonPath": "${workspaceFolder}/venv/bin/python"
+    },
+    "src/auth-service": {
+      "python.pythonPath": "${workspaceFolder}/venv/bin/python"
+    },
+    "src/ecomm-service": {
+      "python.pythonPath": "${workspaceFolder}/venv/bin/python"
+    },
+    "src/qa-service": {
+      "python.pythonPath": "${workspaceFolder}/venv/bin/python"
+    },
+    "src/web-app": {
+      "python.pythonPath": "${workspaceFolder}/venv/bin/python"
+    },
+    "src/api-gateway": {
+      "python.pythonPath": "${workspaceFolder}/venv/bin/python"
+    }
+  }
+}
