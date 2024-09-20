@@ -16,6 +16,9 @@
       "path": "src/qa-service"
     },
     {
+      "path": "src/user-service"
+    },
+    {
       "path": "src/web-app"
     },
     {
@@ -33,6 +36,9 @@
       "python.pythonPath": "${workspaceFolder}/venv/bin/python"
     },
     "src/qa-service": {
+      "python.pythonPath": "${workspaceFolder}/venv/bin/python"
+    },
+    "src/user-service": {
       "python.pythonPath": "${workspaceFolder}/venv/bin/python"
     },
     "src/web-app": {
