@@ -25,7 +25,7 @@ export const StyledHeader = styled(Box)(({ theme }) => ({
     fontSize: "1.75rem",
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
-      paddingRight: "35px",
+      paddingRight: "45px",
     },
     [theme.breakpoints.up("sm")]: {
       display: "block",
