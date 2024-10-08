@@ -1,14 +1,8 @@
-import {
-  Avatar,
-  Button,
-  TextField,
-  Link,
-  Grid2,
-  Box,
-  Typography
-} from '@mui/material'
+import { Avatar, Button, TextField, Box, Typography } from '@mui/material'
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
 import { StyledSignUpPage } from './SignUpPage.style'
+import { PAGE_PATHS } from '@/routes'
+import { CustomLink } from '@/components/CustomLink'
 
 export const SignUpPage = () => {
   return (
@@ -70,11 +64,11 @@ export const SignUpPage = () => {
           >
             Sign Up
           </Button>
-          <Grid2 container>
-            <Link href="#" variant="body2">
-              Already have an account?
-            </Link>
-          </Grid2>
+          <CustomLink
+            linkText="Already have an account?"
+            link={PAGE_PATHS.SIGN_IN}
+            variant="body2"
+          />
         </Box>
       </Box>
     </StyledSignUpPage>

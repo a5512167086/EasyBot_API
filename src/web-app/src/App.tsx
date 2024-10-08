@@ -1,19 +1,17 @@
-import { Suspense } from 'react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { CustomLoader } from '@/components/CustomLoader'
 import { theme } from '@/configs/theme'
-import { BaseWrapper } from './components/BaseWrapper'
-import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage'
+import { RouterProvider } from 'react-router-dom'
+import { router } from '@/routes/index'
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BaseWrapper>
-        <Suspense fallback={<CustomLoader size="6rem" text="Loading..." />}>
-          <ForgotPasswordPage></ForgotPasswordPage>
-        </Suspense>
-      </BaseWrapper>
+      <RouterProvider
+        router={router}
+        fallbackElement={<CustomLoader size="6rem" text="Loading..." />}
+      />
     </ThemeProvider>
   )
 }

@@ -8,12 +8,18 @@ import {
 } from '@mui/material'
 import { CustomDrawerProps } from './Drawer.type'
 import { StyledDrawer } from './Drawer.style'
+import { useNavigate } from 'react-router-dom'
 
 export const CustomDrawer = ({
   navItems,
   isOpen,
   handleDrawerToggle
 }: CustomDrawerProps) => {
+  const navigate = useNavigate()
+  const handleNavigation = (link: string) => {
+    navigate(link)
+  }
+
   return (
     <StyledDrawer
       variant="temporary"
@@ -28,7 +34,12 @@ export const CustomDrawer = ({
         <List>
           {navItems.map((item) => (
             <ListItem key={item.text}>
-              <ListItemButton className="drawer__listButton">
+              <ListItemButton
+                className="drawer__listButton"
+                onClick={() => {
+                  handleNavigation(item.link)
+                }}
+              >
                 <ListItemText primary={item.text} />
               </ListItemButton>
             </ListItem>

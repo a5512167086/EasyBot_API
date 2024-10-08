@@ -11,18 +11,24 @@ import MenuIcon from '@mui/icons-material/Menu'
 import logo from '@/assets/header_logo.png'
 import { StyledHeader } from './Header.style'
 import { CustomDrawer } from '@/components/CustomDrawer'
-import { NAVIGATION_ROUTE } from '@/configs/common'
+import { PUBLIC_NAVIGATION_ROUTE } from '@/routes'
+import { useNavigate } from 'react-router-dom'
 
 export const Header = () => {
+  const navigate = useNavigate()
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const handleDrawerToggle = () => {
     setIsDrawerOpen((prevState) => !prevState)
   }
 
+  const handleNavigation = (link: string) => {
+    navigate(link)
+  }
+
   return (
     <StyledHeader>
-      <AppBar component="nav" position="sticky">
+      <AppBar component="nav" position="fixed">
         <Toolbar className="header__toolbar">
           <IconButton
             color="inherit"
@@ -38,8 +44,14 @@ export const Header = () => {
             EasyBot
           </Typography>
           <Box className="header__navBox">
-            {NAVIGATION_ROUTE.map((item) => (
-              <Button key={item.text} className="header__navLink">
+            {PUBLIC_NAVIGATION_ROUTE.map((item) => (
+              <Button
+                key={item.text}
+                className="header__navLink"
+                onClick={() => {
+                  handleNavigation(item.link)
+                }}
+              >
                 {item.text}
               </Button>
             ))}
@@ -48,7 +60,7 @@ export const Header = () => {
       </AppBar>
       <nav>
         <CustomDrawer
-          navItems={NAVIGATION_ROUTE}
+          navItems={PUBLIC_NAVIGATION_ROUTE}
           isOpen={isDrawerOpen}
           handleDrawerToggle={handleDrawerToggle}
         />

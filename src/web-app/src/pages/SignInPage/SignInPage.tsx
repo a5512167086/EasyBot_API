@@ -4,7 +4,6 @@ import {
   TextField,
   FormControlLabel,
   Checkbox,
-  Link,
   Grid2,
   Box,
   Typography
@@ -13,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { StyledSignInPage } from './SignInPage.style'
 import { CustomDivider } from '@/components/CustomDivider'
 import { OAuth } from '@/components/OAuth'
+import { CustomLink } from '@/components/CustomLink'
+import { PAGE_PATHS } from '@/routes'
 
 export const SignInPage = () => {
   return (
@@ -62,14 +63,18 @@ export const SignInPage = () => {
           </Button>
           <Grid2 container>
             <Grid2 size={{ xs: 12, sm: 4 }}>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+              <CustomLink
+                linkText="Forgot password?"
+                link={PAGE_PATHS.FORGOT_PASSWORD}
+                variant="body2"
+              />
             </Grid2>
             <Grid2 size={{ xs: 12, sm: 8 }} className="signin__signupButton">
-              <Link href="#" variant="body2">
-                Don't have an account? Sign Up
-              </Link>
+              <CustomLink
+                linkText="Don't have an account? Sign Up"
+                link={PAGE_PATHS.SIGN_UP}
+                variant="body2"
+              />
             </Grid2>
           </Grid2>
         </Box>

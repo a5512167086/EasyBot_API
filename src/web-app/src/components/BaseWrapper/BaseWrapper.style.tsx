@@ -9,6 +9,6 @@ export const StyledBaseWrapper = styled(Box)(() => ({
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
-    padding: '10px'
+    padding: '10px 0 20px 0'
   }
 }))
