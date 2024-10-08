@@ -1,8 +1,7 @@
 import { styled } from '@mui/material/styles'
 import { Container } from '@mui/material'
-import { theme } from '@/configs/theme'
 
-export const StyledForgotPasswordPage = styled(Container)(() => ({
+export const StyledForgotPasswordPage = styled(Container)(({ theme }) => ({
   '& .forgot__box': {
     marginTop: 8,
     display: 'flex',

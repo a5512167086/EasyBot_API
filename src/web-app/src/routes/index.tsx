@@ -3,6 +3,11 @@ import { SignInPage } from '@/pages/SignInPage'
 import { SignUpPage } from '@/pages/SignUpPage'
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage'
 import { BaseWrapper } from '@/components/BaseWrapper'
+import { lazy } from 'react'
+
+const BotPage = lazy(() =>
+  import('@/pages/BotPage').then((module) => ({ default: module.BotPage }))
+)
 
 export const PAGE_PATHS = {
   BASE: '/',
@@ -24,7 +29,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>Test</div>
+        element: <BotPage />
       },
       {
         path: PAGE_PATHS.SIGN_IN,
