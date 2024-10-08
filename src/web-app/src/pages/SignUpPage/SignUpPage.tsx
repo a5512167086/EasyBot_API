@@ -9,22 +9,18 @@ import {
   Box,
   Typography
 } from '@mui/material'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { StyledSignInPage } from './SignInPage.style'
-import { CustomDivider } from '@/components/CustomDivider'
-import { OAuth } from '@/components/OAuth'
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
+import { StyledSignUpPage } from './SignUpPage.style'
 
-export const SignInPage = () => {
+export const SignUpPage = () => {
   return (
-    <StyledSignInPage maxWidth="xs">
+    <StyledSignUpPage maxWidth="xs">
       <Box className="signin__box">
         <Avatar className="signin__avatar">
-          <LockOutlinedIcon />
+          <PersonAddAltIcon />
         </Avatar>
-        <OAuth />
-        <CustomDivider text="OR" />
         <Typography component="h1" variant="h5">
-          Sign In
+          Sign Up
         </Typography>
         <Box component="form" noValidate className="signin__formBox">
           <TextField
@@ -74,6 +70,6 @@ export const SignInPage = () => {
           </Grid2>
         </Box>
       </Box>
-    </StyledSignInPage>
+    </StyledSignUpPage>
   )
 }

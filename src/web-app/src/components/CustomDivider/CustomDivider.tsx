@@ -1,5 +1,5 @@
-import { StyledDivider } from "./CustomDivider.style";
-import { CustomDividerProps } from "./CustomDivider.type";
+import { StyledDivider } from './CustomDivider.style'
+import { CustomDividerProps } from './CustomDivider.type'
 
 export const CustomDivider = ({ text }: CustomDividerProps) => {
   return (
@@ -8,5 +8,5 @@ export const CustomDivider = ({ text }: CustomDividerProps) => {
       {text && <span className="divider__text">{text}</span>}
       <div className="divider__line" />
     </StyledDivider>
-  );
-};
+  )
+}

@@ -1,24 +1,24 @@
-import { useState } from "react";
+import { useState } from 'react'
 import {
   AppBar,
   Box,
   IconButton,
   Toolbar,
   Typography,
-  Button,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import logo from "@/assets/header_logo.png";
-import { StyledHeader } from "./Header.style";
-import { CustomDrawer } from "@/components/CustomDrawer";
-import { NAVIGATION_ROUTE } from "@/configs/common";
+  Button
+} from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import logo from '@/assets/header_logo.png'
+import { StyledHeader } from './Header.style'
+import { CustomDrawer } from '@/components/CustomDrawer'
+import { NAVIGATION_ROUTE } from '@/configs/common'
 
 export const Header = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const handleDrawerToggle = () => {
-    setIsDrawerOpen((prevState) => !prevState);
-  };
+    setIsDrawerOpen((prevState) => !prevState)
+  }
 
   return (
     <StyledHeader>
@@ -54,5 +54,5 @@ export const Header = () => {
         />
       </nav>
     </StyledHeader>
-  );
-};
+  )
+}

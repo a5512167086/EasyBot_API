@@ -1,18 +1,18 @@
-import Divider from "@mui/material/Divider";
+import Divider from '@mui/material/Divider'
 import {
   Box,
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
-} from "@mui/material";
-import { CustomDrawerProps } from "./Drawer.type";
-import { StyledDrawer } from "./Drawer.style";
+  ListItemText
+} from '@mui/material'
+import { CustomDrawerProps } from './Drawer.type'
+import { StyledDrawer } from './Drawer.style'
 
 export const CustomDrawer = ({
   navItems,
   isOpen,
-  handleDrawerToggle,
+  handleDrawerToggle
 }: CustomDrawerProps) => {
   return (
     <StyledDrawer
@@ -20,7 +20,7 @@ export const CustomDrawer = ({
       open={isOpen}
       onClose={handleDrawerToggle}
       ModalProps={{
-        keepMounted: true,
+        keepMounted: true
       }}
     >
       <Box onClick={handleDrawerToggle} className="drawer__box">
@@ -36,5 +36,5 @@ export const CustomDrawer = ({
         </List>
       </Box>
     </StyledDrawer>
-  );
-};
+  )
+}

@@ -1,3 +1,3 @@
 export type CustomDividerProps = {
-  text?: string;
-};
+  text?: string
+}

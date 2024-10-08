@@ -1,5 +1,5 @@
-import { StyledFooter } from "./Footer.style";
-import { Typography } from "@mui/material";
+import { StyledFooter } from './Footer.style'
+import { Typography } from '@mui/material'
 
 export const Footer = () => {
   return (
@@ -9,5 +9,5 @@ export const Footer = () => {
         rights reserved.
       </Typography>
     </StyledFooter>
-  );
-};
+  )
+}

@@ -1,1 +1,1 @@
-export * from "./CustomDivider";
+export * from './CustomDivider'

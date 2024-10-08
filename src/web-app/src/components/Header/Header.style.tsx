@@ -1,53 +1,53 @@
-import { styled } from "@mui/material/styles";
-import { Box } from "@mui/material";
+import { styled } from '@mui/material/styles'
+import { Box } from '@mui/material'
 
 export const StyledHeader = styled(Box)(({ theme }) => ({
-  display: "flex",
-  height: "80px",
-  "& .header__toolbar": {
-    height: "100%",
+  display: 'flex',
+  height: '80px',
+  '& .header__toolbar': {
+    height: '100%'
   },
-  "& .header__iconButton": {
-    marginRight: "20px",
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
+  '& .header__iconButton': {
+    marginRight: '20px',
+    [theme.breakpoints.up('sm')]: {
+      display: 'none'
+    }
   },
-  "& .header__logo": {
-    height: "60px",
-    width: "60px",
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
+  '& .header__logo': {
+    height: '60px',
+    width: '60px',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
   },
-  "& .header__title": {
+  '& .header__title': {
     flexGrow: 1,
-    fontSize: "1.75rem",
-    [theme.breakpoints.down("sm")]: {
-      textAlign: "center",
-      paddingRight: "45px",
+    fontSize: '1.75rem',
+    [theme.breakpoints.down('sm')]: {
+      textAlign: 'center',
+      paddingRight: '45px'
     },
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
+    [theme.breakpoints.up('sm')]: {
+      display: 'block'
+    }
   },
-  "& .header__navBox": {
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
+  '& .header__navBox': {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
     },
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
+    [theme.breakpoints.up('sm')]: {
+      display: 'block'
+    }
   },
-  "& .header__navLink": {
-    color: theme.palette.common.white,
+  '& .header__navLink': {
+    color: theme.palette.common.white
   },
-  "& .header__drawer": {
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
+  '& .header__drawer': {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
     },
-    [theme.breakpoints.down("xs")]: {
-      display: "block",
-    },
-  },
-}));
+    [theme.breakpoints.down('xs')]: {
+      display: 'block'
+    }
+  }
+}))

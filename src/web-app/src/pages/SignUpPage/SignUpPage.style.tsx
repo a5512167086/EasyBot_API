@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles'
 import { Container } from '@mui/material'
 import { theme } from '@/configs/theme'
 
-export const StyledSignInPage = styled(Container)(() => ({
+export const StyledSignUpPage = styled(Container)(() => ({
   '& .signin__box': {
     marginTop: 8,
     display: 'flex',

@@ -1,7 +1,7 @@
-import { Button } from "@mui/material";
-import GoogleIcon from "@mui/icons-material/Google";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import { StyledOAuth } from "./OAuth.style";
+import { Button } from '@mui/material'
+import GoogleIcon from '@mui/icons-material/Google'
+import FacebookIcon from '@mui/icons-material/Facebook'
+import { StyledOAuth } from './OAuth.style'
 
 export const OAuth = () => {
   return (
@@ -25,5 +25,5 @@ export const OAuth = () => {
         Continue with Facebook
       </Button>
     </StyledOAuth>
-  );
-};
+  )
+}

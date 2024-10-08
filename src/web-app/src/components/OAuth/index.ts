@@ -1,1 +1,1 @@
-export * from "./OAuth.tsx";
+export * from './OAuth.tsx'

@@ -1,3 +1,3 @@
 export type CustomLoaderProps = {
-  text?: string;
-};
+  text?: string
+}

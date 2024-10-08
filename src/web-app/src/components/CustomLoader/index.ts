@@ -1,1 +1,1 @@
-export * from "./CustomLoader";
+export * from './CustomLoader'
