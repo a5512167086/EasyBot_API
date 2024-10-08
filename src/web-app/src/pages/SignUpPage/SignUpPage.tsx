@@ -2,8 +2,6 @@ import {
   Avatar,
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid2,
   Box,
@@ -15,14 +13,24 @@ import { StyledSignUpPage } from './SignUpPage.style'
 export const SignUpPage = () => {
   return (
     <StyledSignUpPage maxWidth="xs">
-      <Box className="signin__box">
-        <Avatar className="signin__avatar">
+      <Box className="signup__box">
+        <Avatar className="signup__avatar">
           <PersonAddAltIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
-        <Box component="form" noValidate className="signin__formBox">
+        <Box component="form" noValidate className="signup__formBox">
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label="Full Name"
+            name="name"
+            autoComplete="name"
+          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -44,29 +52,28 @@ export const SignUpPage = () => {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="confirm-password"
+            label="Confirm Password"
+            type="password"
+            id="confirm-password"
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            className="sigin__signinButton"
+            className="sigin__signupButton"
           >
-            Sign In
+            Sign Up
           </Button>
           <Grid2 container>
-            <Grid2 size={{ xs: 12, sm: 4 }}>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid2>
-            <Grid2 size={{ xs: 12, sm: 8 }} className="signin__signupButton">
-              <Link href="#" variant="body2">
-                Don't have an account? Sign Up
-              </Link>
-            </Grid2>
+            <Link href="#" variant="body2">
+              Already have an account?
+            </Link>
           </Grid2>
         </Box>
       </Box>
