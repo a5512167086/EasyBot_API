@@ -36,6 +36,7 @@ export const BotPage = () => {
           >
             <CustomCard
               imgSrc={BotIcon}
+              enableHeaderButton={true}
               cardButton={false}
               titleText={bot}
               actionType={ActionType.Button}

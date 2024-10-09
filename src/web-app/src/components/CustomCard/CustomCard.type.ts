@@ -8,6 +8,7 @@ export enum ActionType {
 
 export type CustomCardProps = {
   imgSrc?: string
+  enableHeaderButton?: boolean
   cardButton: boolean
   titleText?: string
   actionType: ActionType

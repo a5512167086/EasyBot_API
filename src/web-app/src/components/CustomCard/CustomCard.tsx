@@ -2,12 +2,14 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import CardActionArea from '@mui/material/CardActionArea'
-import { StyledCustomCard } from './CustomCard.style'
+import { StyledCustomCard, StyledSwitch } from './CustomCard.style'
 import { ActionType, CustomCardProps } from './CustomCard.type'
-import { Button, FormControlLabel, Switch } from '@mui/material'
+import { Button, FormControlLabel, IconButton } from '@mui/material'
+import SettingsIcon from '@mui/icons-material/Settings'
 
 export const CustomCard = ({
   imgSrc,
+  enableHeaderButton,
   cardButton,
   titleText,
   actionType,
@@ -16,11 +18,22 @@ export const CustomCard = ({
 }: CustomCardProps) => {
   return (
     <StyledCustomCard>
+      {enableHeaderButton && (
+        <IconButton className="card__headerButton">
+          <SettingsIcon />
+        </IconButton>
+      )}
       {cardButton ? (
         <CardActionArea className="card__actionArea">
           <CardContent className="card__content">
             {imgSrc && (
-              <CardMedia component="img" image={imgSrc} className="card__img" />
+              <div>
+                <CardMedia
+                  component="img"
+                  image={imgSrc}
+                  className="card__img"
+                />
+              </div>
             )}
             <Typography variant="h5" component="div" className="card__title">
               {titleText}
@@ -36,15 +49,20 @@ export const CustomCard = ({
             {titleText}
           </Typography>
           {actionType === ActionType.Button && (
-            <Button startIcon={buttonIcon} variant="outlined">
+            <Button
+              startIcon={buttonIcon}
+              variant="outlined"
+              className="card__button"
+            >
               {buttonText}
             </Button>
           )}
           {actionType === ActionType.Switch && (
             <FormControlLabel
               value="start"
-              control={<Switch color="primary" />}
+              control={<StyledSwitch sx={{ m: 1 }} color="primary" />}
               label={buttonText}
+              className="card__switch"
               labelPlacement="start"
             />
           )}
