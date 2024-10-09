@@ -4,6 +4,7 @@ import { SignUpPage } from '@/pages/SignUpPage'
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage'
 import { BaseWrapper } from '@/components/BaseWrapper'
 import { lazy } from 'react'
+import OAuthCallback from '@/pages/OAuthCallbackPage/OAuthCallback'
 
 const BotPage = lazy(() =>
   import('@/pages/BotPage').then((module) => ({ default: module.BotPage }))
@@ -13,7 +14,8 @@ export const PAGE_PATHS = {
   BASE: '/',
   SIGN_IN: '/sign-in',
   SIGN_UP: '/sign-up',
-  FORGOT_PASSWORD: '/forgot-password'
+  FORGOT_PASSWORD: '/forgot-password',
+  OAUTH_CALLBACK: '/oauth-callback'
 }
 
 export const PUBLIC_NAVIGATION_ROUTE = [
@@ -42,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: PAGE_PATHS.FORGOT_PASSWORD,
         element: <ForgotPasswordPage />
+      },
+      {
+        path: PAGE_PATHS.OAUTH_CALLBACK,
+        element: <OAuthCallback />
       }
     ]
   }
