@@ -11,6 +11,7 @@ export const CustomCard = ({
   imgSrc,
   enableHeaderButton,
   cardButton,
+  cardButtonAction,
   titleText,
   actionType,
   buttonText,
@@ -24,7 +25,7 @@ export const CustomCard = ({
         </IconButton>
       )}
       {cardButton ? (
-        <CardActionArea className="card__actionArea">
+        <CardActionArea className="card__actionArea" onClick={cardButtonAction}>
           <CardContent className="card__content">
             {imgSrc && (
               <div>

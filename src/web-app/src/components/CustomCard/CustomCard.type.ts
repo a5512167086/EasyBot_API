@@ -10,6 +10,7 @@ export type CustomCardProps = {
   imgSrc?: string
   enableHeaderButton?: boolean
   cardButton: boolean
+  cardButtonAction?: () => void
   titleText?: string
   actionType: ActionType
   buttonText?: string

@@ -5,10 +5,22 @@ import { ActionType } from '@/components/CustomCard/CustomCard.type'
 import SettingsIcon from '@mui/icons-material/Settings'
 import AddIcon from '@/assets/add_icon.png'
 import BotIcon from '@/assets/bot_icon.png'
+import { CustomDialog } from '@/components/CustomDialog'
+import { useState } from 'react'
 
 const mockBotData = ['Bot 1', 'Bot 2', 'Bot 3', 'Bot 4', 'Bot 5']
 
 export const BotPage = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+  const handleDialogOpen = () => {
+    setIsDialogOpen(true)
+  }
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false)
+  }
+
   return (
     <StyledBotPage maxWidth="lg">
       <Typography className="bot__title" variant="h6">
@@ -23,6 +35,7 @@ export const BotPage = () => {
           <CustomCard
             imgSrc={AddIcon}
             cardButton={true}
+            cardButtonAction={handleDialogOpen}
             titleText="Add New Bot"
             actionType={ActionType.None}
           />
@@ -46,6 +59,7 @@ export const BotPage = () => {
           </Grid2>
         ))}
       </Grid2>
+      <CustomDialog isOpen={isDialogOpen} handleClose={handleDialogClose} />
     </StyledBotPage>
   )
 }
