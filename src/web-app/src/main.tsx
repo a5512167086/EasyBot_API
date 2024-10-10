@@ -6,7 +6,9 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import App from './App.tsx'
 import './index.css'
+import { easterEggLog } from './utils/easterEgg.ts'
 
+easterEggLog()
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
