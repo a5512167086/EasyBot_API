@@ -16,7 +16,8 @@ export const CustomCard = ({
   descriptionText,
   actionType,
   buttonText,
-  buttonIcon
+  buttonIcon,
+  buttonAction
 }: CustomCardProps) => {
   return (
     <StyledCustomCard>
@@ -63,6 +64,7 @@ export const CustomCard = ({
               startIcon={buttonIcon}
               variant="outlined"
               className="card__button"
+              onClick={buttonAction}
             >
               {buttonText}
             </Button>

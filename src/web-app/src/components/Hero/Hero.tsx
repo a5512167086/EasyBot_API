@@ -6,7 +6,7 @@ export const Hero = () => {
   return (
     <StyledHero maxWidth="md">
       <div className="hero__card">
-        <img className="hero__img" src={HeroBackground} alt="" />
+        <img className="hero__img" src={HeroBackground} alt="" loading="lazy" />
       </div>
       <div className="hero__textBox">
         <Typography variant="h6" className="hero__title">

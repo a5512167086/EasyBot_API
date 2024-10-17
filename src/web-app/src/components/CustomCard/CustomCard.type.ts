@@ -16,4 +16,5 @@ export type CustomCardProps = {
   actionType: ActionType
   buttonText?: string
   buttonIcon?: ReactNode
+  buttonAction?: () => void
 }

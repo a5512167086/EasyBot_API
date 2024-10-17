@@ -1,4 +1,4 @@
-import { Grid2, Typography } from '@mui/material'
+import { Breadcrumbs, Grid2 } from '@mui/material'
 import { StyledModulePage } from './ModulePage.style'
 import { CustomCard } from '@/components/CustomCard'
 import { ActionType } from '@/components/CustomCard/CustomCard.type'
@@ -6,6 +6,8 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import FAQIcon from '@/assets/faq_icon.png'
 import EcommIcon from '@/assets/ecomm_icon.png'
 import ReservaitonIcon from '@/assets/reservation_icon.png'
+import { CustomLink } from '@/components/CustomLink'
+import { PAGE_PATHS } from '@/routes'
 
 const moduleData = [
   { moduleName: 'FAQ Module', moduleImg: FAQIcon },
@@ -16,9 +18,17 @@ const moduleData = [
 export const ModulePage = () => {
   return (
     <StyledModulePage>
-      <Typography className="bot__title" variant="h6">
-        My Modules
-      </Typography>
+      <Breadcrumbs
+        sx={{ fontSize: '1.25rem', fontWeight: 'bold', margin: '20px 0' }}
+      >
+        <CustomLink link={PAGE_PATHS.BOT_LIST} linkText="My Bots" />
+        <CustomLink
+          link={PAGE_PATHS.MODULE_LIST}
+          linkText="My Modules"
+          color="text.primary"
+          aria-current="page"
+        />
+      </Breadcrumbs>
       <Grid2 container spacing={4}>
         {moduleData.map((module) => (
           <Grid2

@@ -14,8 +14,15 @@ import { CustomDivider } from '@/components/CustomDivider'
 import { OAuth } from '@/components/OAuth'
 import { CustomLink } from '@/components/CustomLink'
 import { PAGE_PATHS } from '@/routes'
+import { useNavigate } from 'react-router-dom'
 
 export const SignInPage = () => {
+  const navigate = useNavigate()
+
+  const handleSignIn = () => {
+    navigate(PAGE_PATHS.BOT_LIST)
+  }
+
   return (
     <StyledSignInPage maxWidth="xs">
       <Box className="signin__box">
@@ -27,7 +34,14 @@ export const SignInPage = () => {
         <Typography component="h1" variant="h5">
           Sign In
         </Typography>
-        <Box component="form" noValidate className="signin__formBox">
+        <Box
+          component="form"
+          className="signin__formBox"
+          onSubmit={(event) => {
+            event.preventDefault()
+            handleSignIn()
+          }}
+        >
           <TextField
             variant="outlined"
             margin="normal"

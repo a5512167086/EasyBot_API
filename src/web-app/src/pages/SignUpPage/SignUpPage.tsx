@@ -3,8 +3,15 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
 import { StyledSignUpPage } from './SignUpPage.style'
 import { PAGE_PATHS } from '@/routes'
 import { CustomLink } from '@/components/CustomLink'
+import { useNavigate } from 'react-router-dom'
 
 export const SignUpPage = () => {
+  const navigate = useNavigate()
+
+  const handleSignUp = () => {
+    navigate(PAGE_PATHS.SIGN_IN)
+  }
+
   return (
     <StyledSignUpPage maxWidth="xs">
       <Box className="signup__box">
@@ -14,7 +21,7 @@ export const SignUpPage = () => {
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
-        <Box component="form" noValidate className="signup__formBox">
+        <Box component="form" className="signup__formBox">
           <TextField
             variant="outlined"
             margin="normal"
@@ -57,10 +64,10 @@ export const SignUpPage = () => {
             id="confirm-password"
           />
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             className="sigin__signupButton"
+            onClick={handleSignUp}
           >
             Sign Up
           </Button>

@@ -15,7 +15,7 @@ export const ForgotPasswordPage = () => {
         <Typography className="forgot__description">
           Enter your email address and we will send you a password reset email.
         </Typography>
-        <Box component="form" noValidate className="forgot__formBox">
+        <Box component="form" className="forgot__formBox">
           <TextField
             variant="outlined"
             margin="normal"
