@@ -63,13 +63,14 @@ export const StyledSwitch = styled((props: SwitchProps) => (
 
 export const StyledCustomCard = styled(Card)(({ theme }) => ({
   position: 'relative',
-  backgroundColor: theme.palette.primary.light,
+  backgroundColor: theme.palette.common.white,
   borderRadius: '30px',
-  height: '320px',
+  maxWidth: '350px',
+  minHeight: '320px',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
+  alignItems: 'center',
   '& .card__headerButton': {
     top: '10px',
     right: '10px',
@@ -84,16 +85,27 @@ export const StyledCustomCard = styled(Card)(({ theme }) => ({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  '& .card__imgBox': {
+    width: '100%',
+    minHeight: ' 200px',
+    display: 'flex',
+    justifyContent: 'center'
+  },
   '& .card__img': {
     objectFit: 'contain',
     maxWidth: '150px',
     minHeight: '150px'
   },
   '& .card__title': {
-    fontSize: '1.75rem',
+    fontSize: '1.35rem',
     textAlign: 'center',
     fontWeight: 'bold',
-    margin: '5px'
+    marginBottom: '15px'
+  },
+  '& .card__description': {
+    width: '100%',
+    padding: '0 10px',
+    textAlign: 'left'
   },
   '& .card__button': {
     fontWeight: 'bold',

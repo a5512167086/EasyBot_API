@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { CustomLoader } from '@/components/CustomLoader'
 // import axios from 'axios'
 
-const OAuthCallback = () => {
+export const OAuthCallback = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -29,5 +29,3 @@ const OAuthCallback = () => {
 
   return <CustomLoader size="6rem" text="Loading..." />
 }
-
-export default OAuthCallback

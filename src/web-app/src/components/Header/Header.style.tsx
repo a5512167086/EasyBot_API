@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 
 export const StyledHeader = styled(Box)(({ theme }) => ({
   display: 'flex',
-  height: '80px',
+  height: '64px',
   '& .header__toolbar': {
     height: '100%'
   },

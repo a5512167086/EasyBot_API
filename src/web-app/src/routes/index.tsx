@@ -1,12 +1,13 @@
+import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import { SignInPage } from '@/pages/SignInPage'
 import { SignUpPage } from '@/pages/SignUpPage'
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage'
 import { BaseWrapper } from '@/components/BaseWrapper'
-import { lazy } from 'react'
-import OAuthCallback from '@/pages/OAuthCallbackPage/OAuthCallback'
+import { OAuthCallback } from '@/pages/OAuthCallbackPage/OAuthCallback'
 import { ModulePage } from '@/pages/ModulePage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
+import { Homepage } from '@/pages/Homepage'
 
 const BotPage = lazy(() =>
   import('@/pages/BotPage').then((module) => ({ default: module.BotPage }))
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <></>
+        element: <Homepage />
       },
       {
         path: PAGE_PATHS.SIGN_IN,

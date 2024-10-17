@@ -12,6 +12,7 @@ export type CustomCardProps = {
   cardButton: boolean
   cardButtonAction?: () => void
   titleText?: string
+  descriptionText?: string
   actionType: ActionType
   buttonText?: string
   buttonIcon?: ReactNode

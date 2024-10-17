@@ -13,6 +13,7 @@ export const CustomCard = ({
   cardButton,
   cardButtonAction,
   titleText,
+  descriptionText,
   actionType,
   buttonText,
   buttonIcon
@@ -28,7 +29,7 @@ export const CustomCard = ({
         <CardActionArea className="card__actionArea" onClick={cardButtonAction}>
           <CardContent className="card__content">
             {imgSrc && (
-              <div>
+              <div className="card__imgBox">
                 <CardMedia
                   component="img"
                   image={imgSrc}
@@ -39,15 +40,23 @@ export const CustomCard = ({
             <Typography variant="h5" component="div" className="card__title">
               {titleText}
             </Typography>
+            <Typography component="div" className="card__description">
+              {descriptionText}
+            </Typography>
           </CardContent>
         </CardActionArea>
       ) : (
         <CardContent className="card__content">
           {imgSrc && (
-            <CardMedia component="img" image={imgSrc} className="card__img" />
+            <div className="card__imgBox">
+              <CardMedia component="img" image={imgSrc} className="card__img" />
+            </div>
           )}
           <Typography variant="h5" component="div" className="card__title">
             {titleText}
+          </Typography>
+          <Typography component="div" className="card__description">
+            {descriptionText}
           </Typography>
           {actionType === ActionType.Button && (
             <Button

@@ -8,9 +8,9 @@ import EcommIcon from '@/assets/ecomm_icon.png'
 import ReservaitonIcon from '@/assets/reservation_icon.png'
 
 const moduleData = [
-  { moduleName: 'FAQ Moudle', moduleImg: FAQIcon },
-  { moduleName: 'Ecomm Moudle', moduleImg: EcommIcon },
-  { moduleName: 'Reservaiton Moudle', moduleImg: ReservaitonIcon }
+  { moduleName: 'FAQ Module', moduleImg: FAQIcon },
+  { moduleName: 'Ecomm Module', moduleImg: EcommIcon },
+  { moduleName: 'Reservation Module', moduleImg: ReservaitonIcon }
 ]
 
 export const ModulePage = () => {
@@ -19,7 +19,7 @@ export const ModulePage = () => {
       <Typography className="bot__title" variant="h6">
         My Modules
       </Typography>
-      <Grid2 container spacing={6}>
+      <Grid2 container spacing={4}>
         {moduleData.map((module) => (
           <Grid2
             size={{ xs: 12, sm: 6, md: 4 }}

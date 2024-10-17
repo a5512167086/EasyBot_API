@@ -8,7 +8,7 @@ import BotIcon from '@/assets/bot_icon.png'
 import { CustomDialog } from '@/components/CustomDialog'
 import { useState } from 'react'
 
-const mockBotData = ['Bot 1', 'Bot 2', 'Bot 3', 'Bot 4', 'Bot 5']
+const mockBotData = ['Adidas Taipei City', 'Bot 2', 'Bot 3', 'Bot 4', 'Bot 5']
 
 export const BotPage = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -26,7 +26,7 @@ export const BotPage = () => {
       <Typography className="bot__title" variant="h6">
         My Bots
       </Typography>
-      <Grid2 container spacing={6}>
+      <Grid2 container spacing={4}>
         <Grid2
           size={{ xs: 12, sm: 6, md: 4 }}
           display="flex"
