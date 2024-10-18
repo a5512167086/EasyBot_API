@@ -1,5 +1,8 @@
 import { Box, styled } from '@mui/material'
 
 export const StyledOAuth = styled(Box)(() => ({
-  '& .oauth__button': { margin: '5px 0' }
+  width: '100%',
+  '& .oauth__button': {
+    margin: '10px 0'
+  }
 }))
