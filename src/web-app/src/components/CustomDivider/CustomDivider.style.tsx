@@ -8,8 +8,8 @@ export const StyledDivider = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(1),
   marginBottom: theme.spacing(1),
   '& .divider__line': {
-    borderBottom: '2px solid lightgray',
-    width: '100%'
+    flexGrow: 1,
+    borderBottom: '2px solid lightgray'
   },
   '& .divider__text': {
     paddingRight: theme.spacing(2),

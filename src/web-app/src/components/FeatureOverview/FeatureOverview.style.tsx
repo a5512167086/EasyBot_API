@@ -7,6 +7,7 @@ export const StyledFeatureOverview = styled(Container)(() => ({
   justifyContent: 'center',
   alignItems: 'center',
   '& .overview__title': {
+    textAlign: 'center',
     margin: '20px 0',
     fontSize: '2rem',
     fontWeight: 'bold'
@@ -14,6 +15,6 @@ export const StyledFeatureOverview = styled(Container)(() => ({
   '& .overview__cardBox': {
     width: '100%',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   }
 }))

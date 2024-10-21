@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { CustomLink } from '@/components/CustomLink'
 import { PAGE_PATHS } from '@/routes'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const mockBotData = [
   'Adidax台北分店',
@@ -19,8 +20,15 @@ const mockBotData = [
   'Adidax南投分店'
 ]
 
+const botPageContent = {
+  title: 'botPage.myBot',
+  addBot: 'botPage.addBot',
+  setting: 'common.setting'
+}
+
 export const BotPage = () => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const handleDialogOpen = () => {
@@ -41,7 +49,7 @@ export const BotPage = () => {
       >
         <CustomLink
           link={PAGE_PATHS.BOT_LIST}
-          linkText="My Bots"
+          linkText={t(botPageContent.title)}
           color="text.primary"
           aria-current="page"
         />
@@ -56,7 +64,7 @@ export const BotPage = () => {
             imgSrc={AddIcon}
             cardButton={true}
             cardButtonAction={handleDialogOpen}
-            titleText="Add New Bot"
+            titleText={t(botPageContent.addBot)}
             actionType={ActionType.None}
           />
         </Grid2>
@@ -73,7 +81,7 @@ export const BotPage = () => {
               cardButton={false}
               titleText={bot}
               actionType={ActionType.Button}
-              buttonText="Setting"
+              buttonText={t(botPageContent.setting)}
               buttonIcon={<SettingsIcon />}
               buttonAction={handleBotSetting}
             />

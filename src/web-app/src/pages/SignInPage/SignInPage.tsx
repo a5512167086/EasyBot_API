@@ -15,8 +15,21 @@ import { OAuth } from '@/components/OAuth'
 import { CustomLink } from '@/components/CustomLink'
 import { PAGE_PATHS } from '@/routes'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+
+const signInContent = {
+  title: 'signPage.signIn',
+  or: 'common.or',
+  signInButtonText: 'signPage.signIn',
+  forgotPassword: 'signPage.forgotPassword',
+  notHaveAccount: 'signPage.notHaveAccount',
+  email: 'signPage.email',
+  password: 'signPage.password',
+  rememberMe: 'signPage.rememberMe'
+}
 
 export const SignInPage = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   const handleSignIn = () => {
@@ -30,9 +43,9 @@ export const SignInPage = () => {
           <LockOutlinedIcon />
         </Avatar>
         <OAuth />
-        <CustomDivider text="OR" />
+        <CustomDivider text={t(signInContent.or)} />
         <Typography component="h1" variant="h5">
-          Sign In
+          {t(signInContent.title)}
         </Typography>
         <Box
           component="form"
@@ -48,7 +61,7 @@ export const SignInPage = () => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={t(signInContent.email)}
             name="email"
             autoComplete="email"
           />
@@ -58,14 +71,14 @@ export const SignInPage = () => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label={t(signInContent.password)}
             type="password"
             id="password"
             autoComplete="current-password"
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            label={t(signInContent.rememberMe)}
           />
           <Button
             type="submit"
@@ -73,19 +86,19 @@ export const SignInPage = () => {
             variant="contained"
             className="sigin__signinButton"
           >
-            Sign In
+            {t(signInContent.signInButtonText)}
           </Button>
           <Grid2 container>
             <Grid2 size={{ xs: 12, sm: 4 }}>
               <CustomLink
-                linkText="Forgot password?"
+                linkText={t(signInContent.forgotPassword)}
                 link={PAGE_PATHS.FORGOT_PASSWORD}
                 variant="body2"
               />
             </Grid2>
             <Grid2 size={{ xs: 12, sm: 8 }} className="signin__signupButton">
               <CustomLink
-                linkText="Don't have an account? Sign Up"
+                linkText={t(signInContent.notHaveAccount)}
                 link={PAGE_PATHS.SIGN_UP}
                 variant="body2"
               />

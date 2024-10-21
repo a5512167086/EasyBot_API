@@ -4,9 +4,21 @@ import { StyledSignUpPage } from './SignUpPage.style'
 import { PAGE_PATHS } from '@/routes'
 import { CustomLink } from '@/components/CustomLink'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+
+const signUpContent = {
+  title: 'signPage.signUp',
+  signUpButtonText: 'signPage.signUp',
+  haveAccount: 'signPage.haveAccount',
+  fullName: 'signPage.fullName',
+  email: 'signPage.email',
+  password: 'signPage.password',
+  confirmPassword: 'signPage.confirmPassword'
+}
 
 export const SignUpPage = () => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const handleSignUp = () => {
     navigate(PAGE_PATHS.SIGN_IN)
@@ -19,7 +31,7 @@ export const SignUpPage = () => {
           <PersonAddAltIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign Up
+          {t(signUpContent.title)}
         </Typography>
         <Box component="form" className="signup__formBox">
           <TextField
@@ -28,7 +40,7 @@ export const SignUpPage = () => {
             required
             fullWidth
             id="name"
-            label="Full Name"
+            label={t(signUpContent.fullName)}
             name="name"
             autoComplete="name"
           />
@@ -38,7 +50,7 @@ export const SignUpPage = () => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={t(signUpContent.email)}
             name="email"
             autoComplete="email"
           />
@@ -48,7 +60,7 @@ export const SignUpPage = () => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label={t(signUpContent.password)}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -59,7 +71,7 @@ export const SignUpPage = () => {
             required
             fullWidth
             name="confirm-password"
-            label="Confirm Password"
+            label={t(signUpContent.confirmPassword)}
             type="password"
             id="confirm-password"
           />
@@ -69,10 +81,10 @@ export const SignUpPage = () => {
             className="sigin__signupButton"
             onClick={handleSignUp}
           >
-            Sign Up
+            {t(signUpContent.signUpButtonText)}
           </Button>
           <CustomLink
-            linkText="Already have an account?"
+            linkText={t(signUpContent.haveAccount)}
             link={PAGE_PATHS.SIGN_IN}
             variant="body2"
           />

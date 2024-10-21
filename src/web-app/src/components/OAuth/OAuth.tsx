@@ -1,8 +1,14 @@
 import { Button } from '@mui/material'
 import GoogleIcon from '@mui/icons-material/Google'
 import { StyledOAuth } from './OAuth.style'
+import { useTranslation } from 'react-i18next'
+
+const oauthContent = {
+  google: 'signPage.google'
+}
 
 export const OAuth = () => {
+  const { t } = useTranslation()
   const handleLogin = () => {
     const client_id =
       '48844684655-se9surcs5rvd5ek14o1b39k0lbhvk6on.apps.googleusercontent.com'
@@ -25,7 +31,7 @@ export const OAuth = () => {
         className="oauth__button"
         startIcon={<GoogleIcon />}
       >
-        Continue with Google
+        {t(oauthContent.google)}
       </Button>
     </StyledOAuth>
   )

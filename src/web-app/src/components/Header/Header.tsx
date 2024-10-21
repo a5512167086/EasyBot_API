@@ -8,14 +8,17 @@ import {
   Button
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import logo from '@/assets/header_logo.png'
+import LogoIcon from '@/assets/header_logo.svg?react'
 import { StyledHeader } from './Header.style'
 import { CustomDrawer } from '@/components/CustomDrawer'
 import { PUBLIC_NAVIGATION_ROUTE } from '@/routes'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { LanguageChanger } from '../LanguageChanger'
 
 export const Header = () => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const handleDrawerToggle = () => {
@@ -39,22 +42,23 @@ export const Header = () => {
           >
             <MenuIcon />
           </IconButton>
-          <img src={logo} className="header__logo" />
+          <LogoIcon className="header__logo" />
           <Typography variant="h6" component="div" className="header__title">
             EasyBot
           </Typography>
           <Box className="header__navBox">
             {PUBLIC_NAVIGATION_ROUTE.map((item) => (
               <Button
-                key={item.text}
+                key={t(item.text)}
                 className="header__navLink"
                 onClick={() => {
                   handleNavigation(item.link)
                 }}
               >
-                {item.text}
+                {t(item.text)}
               </Button>
             ))}
+            <LanguageChanger />
           </Box>
         </Toolbar>
       </AppBar>

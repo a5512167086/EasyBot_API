@@ -16,6 +16,9 @@ export const StyledHeader = styled(Box)(({ theme }) => ({
   '& .header__logo': {
     height: '60px',
     width: '60px',
+    '& path': {
+      fill: `${theme.palette.common.white} !important`
+    },
     [theme.breakpoints.down('sm')]: {
       display: 'none'
     }

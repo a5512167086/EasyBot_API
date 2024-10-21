@@ -7,8 +7,21 @@ import { CustomDialogProps } from './CustomDialog.type'
 import { CustomLink } from '../CustomLink'
 import { Box } from '@mui/material'
 import { StyledDialog } from './CustomDialog.style'
+import { useTranslation } from 'react-i18next'
+
+const dialogContent = {
+  addBot: 'botPage.addBot',
+  botName: 'botPage.botName',
+  channelId: 'botPage.channelId',
+  channelAccessToken: 'botPage.channelAccessToken',
+  channelSecret: 'botPage.channelSecret',
+  seeTutorial: 'botPage.seeTutorial',
+  cancel: 'common.cancel',
+  done: 'common.done'
+}
 
 export const CustomDialog = ({ isOpen, handleClose }: CustomDialogProps) => {
+  const { t } = useTranslation()
   return (
     <>
       <StyledDialog
@@ -28,7 +41,7 @@ export const CustomDialog = ({ isOpen, handleClose }: CustomDialogProps) => {
         }}
       >
         <DialogTitle textAlign="center" variant="h5">
-          Add New Bot
+          {t(dialogContent.addBot)}
         </DialogTitle>
         <DialogContent>
           <TextField
@@ -36,7 +49,7 @@ export const CustomDialog = ({ isOpen, handleClose }: CustomDialogProps) => {
             margin="dense"
             id="botName"
             name="botName"
-            label="Bot Name"
+            label={t(dialogContent.botName)}
             type="text"
             fullWidth
             variant="outlined"
@@ -46,7 +59,7 @@ export const CustomDialog = ({ isOpen, handleClose }: CustomDialogProps) => {
             margin="dense"
             id="channelId"
             name="channelId"
-            label="Channel ID"
+            label={t(dialogContent.channelId)}
             type="text"
             fullWidth
             variant="outlined"
@@ -56,7 +69,7 @@ export const CustomDialog = ({ isOpen, handleClose }: CustomDialogProps) => {
             margin="dense"
             id="channelSecret"
             name="channelSecret"
-            label="Channel Secret"
+            label={t(dialogContent.channelSecret)}
             type="password"
             fullWidth
             variant="outlined"
@@ -66,7 +79,7 @@ export const CustomDialog = ({ isOpen, handleClose }: CustomDialogProps) => {
             margin="dense"
             id="channelAccessToken"
             name="channelAccessToken"
-            label="Channel Access Token"
+            label={t(dialogContent.channelAccessToken)}
             type="password"
             fullWidth
             variant="outlined"
@@ -74,11 +87,11 @@ export const CustomDialog = ({ isOpen, handleClose }: CustomDialogProps) => {
         </DialogContent>
         <DialogActions className="dialog__actionBox">
           <Box>
-            <CustomLink linkText="See Tutorial" link={''} />
+            <CustomLink linkText={t(dialogContent.seeTutorial)} link={''} />
           </Box>
           <Box>
             <Button onClick={handleClose} variant="contained" color="primary">
-              Cancel
+              {t(dialogContent.cancel)}
             </Button>
             <Button
               type="submit"
@@ -86,7 +99,7 @@ export const CustomDialog = ({ isOpen, handleClose }: CustomDialogProps) => {
               color="success"
               className="dialog__actionButton"
             >
-              Done
+              {t(dialogContent.done)}
             </Button>
           </Box>
         </DialogActions>

@@ -1,8 +1,17 @@
 import { Avatar, Button, TextField, Box, Typography } from '@mui/material'
 import HelpCenterIcon from '@mui/icons-material/HelpCenter'
 import { StyledForgotPasswordPage } from './ForgotPasswordPage.style'
+import { useTranslation } from 'react-i18next'
+
+const forgotPasswordContent = {
+  title: 'signPage.forgotPassword',
+  description: 'signPage.forgotPasswordHint',
+  email: 'signPage.email',
+  buttonText: 'signPage.sendPasswordResetEmail'
+}
 
 export const ForgotPasswordPage = () => {
+  const { t } = useTranslation()
   return (
     <StyledForgotPasswordPage maxWidth="xs">
       <Box className="forgot__box">
@@ -10,10 +19,10 @@ export const ForgotPasswordPage = () => {
           <HelpCenterIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Forgot Your Password?
+          {t(forgotPasswordContent.title)}
         </Typography>
         <Typography className="forgot__description">
-          Enter your email address and we will send you a password reset email.
+          {t(forgotPasswordContent.description)}
         </Typography>
         <Box component="form" className="forgot__formBox">
           <TextField
@@ -22,7 +31,7 @@ export const ForgotPasswordPage = () => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={t(forgotPasswordContent.email)}
             name="email"
             autoComplete="email"
           />
@@ -32,7 +41,7 @@ export const ForgotPasswordPage = () => {
             variant="contained"
             className="sigin__forgotButton"
           >
-            Send Password Reset Email
+            {t(forgotPasswordContent.buttonText)}
           </Button>
         </Box>
       </Box>

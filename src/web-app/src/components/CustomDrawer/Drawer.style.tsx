@@ -14,5 +14,10 @@ export const StyledDrawer = styled(Drawer)(({ theme }) => ({
   },
   '& .drawer__listButton': {
     textAlign: 'center'
+  },
+  '& .drawer__languageChangerBox': {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center'
   }
 }))

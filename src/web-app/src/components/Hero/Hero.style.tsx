@@ -34,7 +34,7 @@ export const StyledHero = styled(Box)(() => ({
     }
   },
   '& .hero__title': {
-    fontSize: '2.25rem',
+    fontSize: '1.75rem',
     fontWeight: 'bold',
     marginBottom: '10px',
     [theme.breakpoints.down('md')]: {
@@ -42,7 +42,6 @@ export const StyledHero = styled(Box)(() => ({
     }
   },
   '& .hero__description ': {
-
     [theme.breakpoints.down('md')]: {
       fontSize: '1rem'
     }

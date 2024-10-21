@@ -1,8 +1,17 @@
 import HeroBackground from '@/assets/bot_img.jpg'
 import { StyledHero } from './Hero.style'
 import { Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next'
+
+const heroContent = {
+  title: 'homePage.hero.title',
+  subtitle: 'homePage.hero.subtitle',
+  description: 'homePage.hero.description'
+}
 
 export const Hero = () => {
+  const { t } = useTranslation()
+
   return (
     <StyledHero maxWidth="md">
       <div className="hero__card">
@@ -10,12 +19,12 @@ export const Hero = () => {
       </div>
       <div className="hero__textBox">
         <Typography variant="h6" className="hero__title">
-          打造專屬智慧對話體驗
+          {t(heroContent.title)}
           <br />
-          無需Coding經驗，快速上手！
+          {t(heroContent.subtitle)}
         </Typography>
         <Typography variant="h6" className="hero__description">
-          我們的平台讓您能輕鬆建立和管理聊天機器人，支援多種應用場景，無論是客戶服務、自動回應、電子商務，我們的平台都能滿足您的需求。
+          {t(heroContent.description)}
         </Typography>
       </div>
     </StyledHero>

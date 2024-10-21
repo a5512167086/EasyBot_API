@@ -8,23 +8,37 @@ import EcommIcon from '@/assets/ecomm_icon.png'
 import ReservaitonIcon from '@/assets/reservation_icon.png'
 import { CustomLink } from '@/components/CustomLink'
 import { PAGE_PATHS } from '@/routes'
+import { useTranslation } from 'react-i18next'
+
+const modulePageContent = {
+  botPageTitle: 'botPage.myBot',
+  title: 'botPage.myModule',
+  faqTitle: 'common.feature.faqTitle',
+  ecommTitle: 'common.feature.ecommTitle',
+  reservationTitle: 'common.feature.reservationTitle',
+  enable: 'common.enable'
+}
 
 const moduleData = [
-  { moduleName: 'FAQ Module', moduleImg: FAQIcon },
-  { moduleName: 'Ecomm Module', moduleImg: EcommIcon },
-  { moduleName: 'Reservation Module', moduleImg: ReservaitonIcon }
+  { moduleName: modulePageContent.faqTitle, moduleImg: FAQIcon },
+  { moduleName: modulePageContent.ecommTitle, moduleImg: EcommIcon },
+  { moduleName: modulePageContent.reservationTitle, moduleImg: ReservaitonIcon }
 ]
 
 export const ModulePage = () => {
+  const { t } = useTranslation()
   return (
     <StyledModulePage>
       <Breadcrumbs
         sx={{ fontSize: '1.25rem', fontWeight: 'bold', margin: '20px 0' }}
       >
-        <CustomLink link={PAGE_PATHS.BOT_LIST} linkText="My Bots" />
+        <CustomLink
+          link={PAGE_PATHS.BOT_LIST}
+          linkText={t(modulePageContent.botPageTitle)}
+        />
         <CustomLink
           link={PAGE_PATHS.MODULE_LIST}
-          linkText="My Modules"
+          linkText={t(modulePageContent.title)}
           color="text.primary"
           aria-current="page"
         />
@@ -41,9 +55,9 @@ export const ModulePage = () => {
               imgSrc={module.moduleImg}
               enableHeaderButton={true}
               cardButton={false}
-              titleText={module.moduleName}
+              titleText={t(module.moduleName)}
               actionType={ActionType.Switch}
-              buttonText="Enable"
+              buttonText={t(modulePageContent.enable)}
               buttonIcon={<SettingsIcon />}
             />
           </Grid2>

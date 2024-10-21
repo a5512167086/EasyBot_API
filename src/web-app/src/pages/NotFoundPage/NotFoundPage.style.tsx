@@ -1,16 +1,20 @@
-import { Container, styled } from '@mui/material'
+import { Box, styled } from '@mui/material'
 
-export const StyledNotFoundPage = styled(Container)(() => ({
+export const StyledNotFoundPage = styled(Box)(() => ({
+  flexGrow: 1,
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'center',
   alignItems: 'center',
-  height: '100%',
   textAlign: 'center',
+  height: '100%',
   '& .notfound__errorImg': {
-    maxWidth: '200px',
+    maxWidth: '300px',
     margin: '20px 0'
   },
-  '& .notfound__text': {
-    margin: '10px 0 '
+  '& .notfound__title': {
+    margin: '10px 0 ',
+    fontSize: '2.25rem',
+    fontWeight: 'bold'
   }
 }))

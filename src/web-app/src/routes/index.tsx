@@ -25,9 +25,9 @@ export const PAGE_PATHS = {
 }
 
 export const PUBLIC_NAVIGATION_ROUTE = [
-  { text: 'Home', link: PAGE_PATHS.BASE },
-  { text: 'Sign In', link: PAGE_PATHS.SIGN_IN },
-  { text: 'Sign Up', link: PAGE_PATHS.SIGN_UP }
+  { text: 'header.home', link: PAGE_PATHS.BASE },
+  { text: 'header.signIn', link: PAGE_PATHS.SIGN_IN },
+  { text: 'header.signUp', link: PAGE_PATHS.SIGN_UP }
 ]
 
 export const router = createBrowserRouter([

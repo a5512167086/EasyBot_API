@@ -7,6 +7,7 @@ import '@fontsource/roboto/700.css'
 import App from './App.tsx'
 import './index.css'
 import { easterEggLog } from './utils/easterEgg.ts'
+import '@/configs/i18n.ts'
 
 easterEggLog()
 createRoot(document.getElementById('root')!).render(

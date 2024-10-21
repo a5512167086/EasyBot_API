@@ -1,9 +1,13 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CustomLoader } from '@/components/CustomLoader'
+import { useTranslation } from 'react-i18next'
 // import axios from 'axios'
 
+const loaderText = 'common.loading'
+
 export const OAuthCallback = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -27,5 +31,5 @@ export const OAuthCallback = () => {
     // }
   }, [navigate])
 
-  return <CustomLoader size="6rem" text="Loading..." />
+  return <CustomLoader size="6rem" text={t(loaderText)} />
 }

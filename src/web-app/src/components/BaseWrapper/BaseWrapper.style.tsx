@@ -9,6 +9,7 @@ export const StyledBaseWrapper = styled(Box)(() => ({
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     padding: '10px 0 20px 0'
   }
 }))
