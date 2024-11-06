@@ -6,7 +6,6 @@ import psycopg2
 @contextmanager
 def get_db_connection():
     connection = None
-    cursor = None
     try:
         connection = psycopg2.connect(
             database=DB_NAME,
@@ -15,14 +14,11 @@ def get_db_connection():
             host=DB_HOST,
             port=DB_PORT,
         )
-        cursor = connection.cursor()
-        yield cursor  # 直接返回 cursor 給上下文
+        yield connection  # 返回 connection，方便進行提交操作
     except (Exception, psycopg2.Error) as error:
-        print("Error while connecting to PostgreSQL", error)
+        print("Error while connecting to PostgreSQL:", error)
+        raise
     finally:
-        if cursor:
-            cursor.close()  # 確保光標關閉
-            print("Cursor is closed")
         if connection:
-            connection.close()  # 確保連接關閉
+            connection.close()
             print("PostgreSQL connection is closed")
