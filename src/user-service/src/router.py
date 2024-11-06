@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends
-from schemas import RegisterRequest, LoginRequest, TokenResponse, RegisterResponse
-from services.user import register, login
+from fastapi import APIRouter, Depends, Request
+from schemas import RegisterRequest, LoginRequest, TokenResponse, RegisterResponse, User
+from services.user import register, login, get_user_profile
 from utils import verify_jwt_token
 
 router = APIRouter()
@@ -33,9 +33,11 @@ async def forgot_user_password(user):
     return "ok"
 
 
-@privtate_router.get("/user/me", tags=["users"])
-async def get_user():
-    return "ok"
+@privtate_router.get("/user/me", tags=["users"], response_model=User)
+async def get_user(request: Request):
+    user_id = request.state.payload["sub"]
+    user_profile = get_user_profile(user_id)
+    return user_profile
 
 
 @privtate_router.post("/user/change_password", tags=["users"])

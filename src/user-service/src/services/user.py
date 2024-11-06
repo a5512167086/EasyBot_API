@@ -1,19 +1,34 @@
 from fastapi import HTTPException
 from schemas import RegisterRequest, LoginRequest
 from utils import hash_password, create_jwt_token
-from commands.user import create_user, get_user_by_email_and_password
+from commands.user import create_user, get_user_by_email_and_password, get_user_by_id
 from exception import GlobalErrorException
+
+
+def get_user_profile(user_id: str):
+    user_profile = get_user_by_id(user_id)
+    if user_profile is "USER_NOT_EXISTS":
+        raise GlobalErrorException(
+            error_code="USER_NOT_EXISTS",
+            error_message="Can't found user by email.",
+        )
+
+    return user_profile
 
 
 def login(user: LoginRequest):
     login_user_data = get_user_by_email_and_password(user)
 
-    if login_user_data is None:
+    if login_user_data is "USER_NOT_EXISTS":
         raise GlobalErrorException(
-            error_code="USER_NOT_EXISTS", error_message="Can't found user by email.",)
+            error_code="USER_NOT_EXISTS",
+            error_message="Can't found user by email.",
+        )
     if login_user_data == "PASSWORD_NOT_MATCH":
         raise GlobalErrorException(
-            error_code="PASSWORD_NOT_MATCH", error_message="Password is incorrect.",)
+            error_code="PASSWORD_NOT_MATCH",
+            error_message="Password is incorrect.",
+        )
 
     login_user_id = login_user_data["user_id"]
     access_token = create_jwt_token(data={"sub": login_user_id})
@@ -34,9 +49,13 @@ def register(user: RegisterRequest):
 
     if new_user_id == "DUPLICATE_EMAIL":
         raise GlobalErrorException(
-            error_code="USER_ALREADY_EXISTS", error_message="The provided email is already registered.",)
+            error_code="USER_ALREADY_EXISTS",
+            error_message="The provided email is already registered.",
+        )
     elif new_user_id is None:
         raise GlobalErrorException(
-            error_code="USER_CREATION_FAILED", error_message="An error occurred while creating the user.",)
+            error_code="USER_CREATION_FAILED",
+            error_message="An error occurred while creating the user.",
+        )
 
     return {"user_id": new_user_id}

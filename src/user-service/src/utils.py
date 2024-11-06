@@ -1,4 +1,4 @@
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from datetime import datetime, timedelta, timezone
 from config import JWT_SECRET, ALGORITHM
@@ -25,7 +25,9 @@ def create_jwt_token(data: dict, expires_delta: timedelta = None):
     return encoded_jwt
 
 
-def verify_jwt_token(credentials: HTTPAuthorizationCredentials = Depends(HTTPBearer())):
+def verify_jwt_token(
+    request: Request, credentials: HTTPAuthorizationCredentials = Depends(HTTPBearer())
+):
     token = credentials.credentials
     try:
         payload = jwt.decode(token, JWT_SECRET, algorithms=ALGORITHM)
@@ -35,8 +37,7 @@ def verify_jwt_token(credentials: HTTPAuthorizationCredentials = Depends(HTTPBea
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail="Invalid user",
             )
-
-        return payload
+        request.state.payload = payload
     except PyJWTError:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
