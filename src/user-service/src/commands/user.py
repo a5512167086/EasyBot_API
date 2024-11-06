@@ -25,7 +25,6 @@ def get_user_by_email_and_password(user: LoginRequest):
                     user.password.encode("utf-8"), hashed_password.encode("utf-8")
                 ):
                     return "PASSWORD_NOT_MATCH"
-                print(user_data)
                 return user_data
     except Exception:
         return None
@@ -42,7 +41,6 @@ def create_user(user: RegisterRequest):
                     [user.username, user.email, user.password],
                 )
                 user_data = cursor.fetchone()
-                print(user_data)
                 connection.commit()
                 return user_data["fs_insert_user"]
     except psycopg2.Error as error:

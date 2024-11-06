@@ -16,7 +16,7 @@ def login(user: LoginRequest):
             },
         )
 
-    if login_user_data is "PASSWORD_NOT_MATCH":
+    if login_user_data == "PASSWORD_NOT_MATCH":
         raise HTTPException(
             status_code=400,
             detail={
@@ -28,7 +28,7 @@ def login(user: LoginRequest):
     login_user_id = login_user_data["user_id"]
     access_token = create_access_token(data={"sub": login_user_id})
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"token": access_token, "token_type": "bearer"}
 
 
 def register(user: RegisterRequest):
@@ -59,4 +59,4 @@ def register(user: RegisterRequest):
             },
         )
 
-    return new_user_id
+    return {"user_id": new_user_id}
