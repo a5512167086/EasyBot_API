@@ -1,8 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from router import router
+from exception import add_global_exception_handler
+from schemas import ErrorResponse
 import uvicorn
 
-app = FastAPI()
+app = FastAPI(
+    responses={status.HTTP_400_BAD_REQUEST: {"model": ErrorResponse}})
+add_global_exception_handler(app)
 app.include_router(router)
 
 

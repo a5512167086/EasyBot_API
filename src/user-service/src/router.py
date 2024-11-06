@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from schemas import RegisterRequest, LoginRequest, TokenResponse, RegisterResponse
 from services.user import register, login
+from exception import GlobalErrorException
 
 router = APIRouter()
 
