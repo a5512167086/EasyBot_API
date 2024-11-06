@@ -1,14 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from schemas import RegisterRequest, LoginRequest, TokenResponse, RegisterResponse
 from services.user import register, login
-from exception import GlobalErrorException
+from utils import verify_jwt_token
 
 router = APIRouter()
-
-
-@router.get("/user/me", tags=["users"])
-async def get_user():
-    return "ok"
+privtate_router = APIRouter(dependencies=[Depends(verify_jwt_token)])
 
 
 @router.post(
@@ -32,16 +28,21 @@ async def register_user(user: RegisterRequest):
     return new_user_id
 
 
-@router.post("/user/change_password", tags=["users"])
-async def change_password(user):
-    return "ok"
-
-
 @router.post("/user/forgot_password", tags=["users"])
 async def forgot_user_password(user):
     return "ok"
 
 
-@router.post("/user/reset_password", tags=["users"])
+@privtate_router.get("/user/me", tags=["users"])
+async def get_user():
+    return "ok"
+
+
+@privtate_router.post("/user/change_password", tags=["users"])
+async def change_password(user):
+    return "ok"
+
+
+@privtate_router.post("/user/reset_password", tags=["users"])
 async def reset_password(token: str, new_password: str):
     return reset_password(token, new_password)

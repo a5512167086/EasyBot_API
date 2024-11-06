@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from schemas import RegisterRequest, LoginRequest
-from utils import hash_password, create_access_token
+from utils import hash_password, create_jwt_token
 from commands.user import create_user, get_user_by_email_and_password
 from exception import GlobalErrorException
 
@@ -16,7 +16,7 @@ def login(user: LoginRequest):
             error_code="PASSWORD_NOT_MATCH", error_message="Password is incorrect.",)
 
     login_user_id = login_user_data["user_id"]
-    access_token = create_access_token(data={"sub": login_user_id})
+    access_token = create_jwt_token(data={"sub": login_user_id})
 
     return {"token": access_token, "token_type": "bearer"}
 
