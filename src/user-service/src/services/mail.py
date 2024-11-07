@@ -1,8 +1,7 @@
-import smtplib
-import smtplib
 from email.mime.text import MIMEText
-from config import FRONTEND_URL
 from email.mime.multipart import MIMEMultipart
+from config import FRONTEND_URL, EMAIL, EMAIL_APP_PASSWORD
+import smtplib
 
 
 # 使用 smtplib 發送密碼重設電子郵件
@@ -18,16 +17,15 @@ def send_reset_email(email: str, token: str):
 
     # 設置郵件信息
     msg = MIMEMultipart()
-    msg["From"] = ""
+    msg["From"] = EMAIL
     msg["To"] = email
     msg["Subject"] = "Easybot - 重設您的使用者密碼"
     msg.attach(MIMEText(email_content, "plain"))
 
     try:
-        with smtplib.SMTP("smtp.your-email-provider.com", 587) as server:
-            server.starttls()
-            server.login("your_smtp_username", "your_smtp_password")
-            server.sendmail('', email, msg.as_string())
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(EMAIL, EMAIL_APP_PASSWORD)
+            server.sendmail(EMAIL, email, msg.as_string())
         print("Password reset email sent successfully.")
     except Exception as e:
         print(f"Failed to send email: {e}")

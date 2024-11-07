@@ -22,7 +22,8 @@ def get_user_by_email(user_email: str):
     with get_db_connection() as connection:
         with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
             cursor.execute(
-                "SELECT username, email FROM users WHERE email = %s", [user_email]
+                "SELECT user_id, username, email FROM users WHERE email = %s",
+                [user_email],
             )
             user_data = cursor.fetchone()
             if not user_data:
@@ -35,7 +36,8 @@ def get_user_by_email_and_password(user: LoginRequest):
     with get_db_connection() as connection:
         with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
             cursor.execute(
-                "SELECT user_id, email, password FROM users WHERE email = %s", [user.email]
+                "SELECT user_id, email, password FROM users WHERE email = %s",
+                [user.email],
             )
             user_data = cursor.fetchone()
 

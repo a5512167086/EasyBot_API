@@ -8,11 +8,12 @@ from queries.user import (
 )
 from services.mail import send_reset_email
 from exception import GlobalErrorException
+from datetime import timedelta
 
 
 def get_user_profile(user_id: str):
     user_profile = get_user_by_id(user_id)
-    if user_profile is "USER_NOT_EXISTS":
+    if user_profile == "USER_NOT_EXISTS":
         raise GlobalErrorException(
             error_code="USER_NOT_EXISTS",
             error_message="Can't found user by email.",
@@ -24,7 +25,7 @@ def get_user_profile(user_id: str):
 def login(user: LoginRequest):
     login_user_data = get_user_by_email_and_password(user)
 
-    if login_user_data is "USER_NOT_EXISTS":
+    if login_user_data == "USER_NOT_EXISTS":
         raise GlobalErrorException(
             error_code="USER_NOT_EXISTS",
             error_message="Can't found user by email.",
@@ -79,15 +80,15 @@ def forgot_password(user_email: ForgotPasswordRequest):
             error_code="USER_NOT_EXISTS",
             error_message="Can't found user by email.",
         )
-
-    forgot_user_id, forgot_user_email = (
-        forgot_user_data["user_id"],
-        forgot_user_data["email"],
+    print(forgot_user_data)
+    forgot_user_id = forgot_user_data["user_id"]
+    forgot_user_email = forgot_user_data["email"]
+    print(forgot_user_id)
+    token = create_jwt_token(
+        data={"sub": forgot_user_id, "email": forgot_user_email},
+        expires_delta=timedelta(minutes=15),
     )
-
-    token = create_jwt_token(data={"sub": forgot_user_id, "email": forgot_user_email})
     send_reset_email(user_email, token)
-    return None
 
 
 def reset_password(user_id: str, new_password: str):

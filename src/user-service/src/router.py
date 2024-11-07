@@ -6,8 +6,15 @@ from schemas import (
     RegisterResponse,
     User,
     ResetPasswordRequest,
+    ForgotPasswordRequest,
 )
-from services.user import register, login, get_user_profile, reset_password
+from services.user import (
+    register,
+    login,
+    get_user_profile,
+    reset_password,
+    forgot_password,
+)
 from utils import verify_jwt_token
 
 router = APIRouter()
@@ -36,8 +43,9 @@ async def register_user(user: RegisterRequest):
 
 
 @router.post("/user/forgot_password", tags=["users"])
-async def forgot_user_password(token: str, new_password: str):
-    return reset_password(token, new_password)
+async def forgot_user_password(body: ForgotPasswordRequest):
+    user_email = body.email
+    forgot_password(user_email)
 
 
 @privtate_router.get("/user/me", tags=["users"], response_model=User)
