@@ -1,7 +1,12 @@
-from fastapi import HTTPException
-from schemas import RegisterRequest, LoginRequest
+from schemas import RegisterRequest, LoginRequest, ForgotPasswordRequest
 from utils import hash_password, create_jwt_token
-from commands.user import create_user, get_user_by_email_and_password, get_user_by_id
+from commands.user import create_user, update_user_password
+from queries.user import (
+    get_user_by_email_and_password,
+    get_user_by_id,
+    get_user_by_email,
+)
+from services.mail import send_reset_email
 from exception import GlobalErrorException
 
 
@@ -30,8 +35,14 @@ def login(user: LoginRequest):
             error_message="Password is incorrect.",
         )
 
-    login_user_id = login_user_data["user_id"]
-    access_token = create_jwt_token(data={"sub": login_user_id})
+    login_user_id, login_user_email = (
+        login_user_data["user_id"],
+        login_user_data["email"],
+    )
+
+    access_token = create_jwt_token(
+        data={"sub": login_user_id, "email": login_user_email}
+    )
 
     return {"token": access_token, "token_type": "bearer"}
 
@@ -59,3 +70,33 @@ def register(user: RegisterRequest):
         )
 
     return {"user_id": new_user_id}
+
+
+def forgot_password(user_email: ForgotPasswordRequest):
+    forgot_user_data = get_user_by_email(user_email)
+    if forgot_user_data == "USER_NOT_EXISTS":
+        raise GlobalErrorException(
+            error_code="USER_NOT_EXISTS",
+            error_message="Can't found user by email.",
+        )
+
+    forgot_user_id, forgot_user_email = (
+        forgot_user_data["user_id"],
+        forgot_user_data["email"],
+    )
+
+    token = create_jwt_token(data={"sub": forgot_user_id, "email": forgot_user_email})
+    send_reset_email(user_email, token)
+    return None
+
+
+def reset_password(user_id: str, new_password: str):
+    update_user_data = get_user_by_id(user_id)
+    if update_user_data == "USER_NOT_EXISTS":
+        raise GlobalErrorException(
+            error_code="USER_NOT_EXISTS",
+            error_message="Can't found user by email.",
+        )
+
+    hashed_password = hash_password(new_password)
+    update_user_password(user_id, hashed_password)

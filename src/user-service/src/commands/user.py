@@ -1,41 +1,7 @@
 from database import get_db_connection
-from schemas import RegisterRequest, LoginRequest
-import bcrypt
+from schemas import RegisterRequest
 import psycopg2
 import psycopg2.extras
-
-
-def get_user_by_id(user_id: str):
-    with get_db_connection() as connection:
-        with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
-            cursor.execute(
-                "SELECT username, email FROM users WHERE user_id = %s", [user_id]
-            )
-            user_data = cursor.fetchone()
-            if not user_data:
-                return "USER_NOT_EXISTS"
-
-            return user_data
-
-
-def get_user_by_email_and_password(user: LoginRequest):
-    with get_db_connection() as connection:
-        with connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
-            cursor.execute(
-                "SELECT user_id, password FROM users WHERE email = %s", [user.email]
-            )
-            user_data = cursor.fetchone()
-
-            if not user_data:
-                return "USER_NOT_EXISTS"
-
-            hashed_password = user_data["password"]
-
-            if not bcrypt.checkpw(
-                user.password.encode("utf-8"), hashed_password.encode("utf-8")
-            ):
-                return "PASSWORD_NOT_MATCH"
-            return user_data
 
 
 def create_user(user: RegisterRequest):
@@ -51,6 +17,25 @@ def create_user(user: RegisterRequest):
                 user_data = cursor.fetchone()
                 connection.commit()
                 return user_data["fs_insert_user"]
+    except psycopg2.Error as error:
+        error_message = error.diag.message_primary
+        if "EMail已存在" in error_message:
+            return "DUPLICATE_EMAIL"
+
+        return None
+
+
+def update_user_password(update_user_id: str, new_password: str):
+    try:
+        with get_db_connection() as connection:
+            with connection.cursor(
+                cursor_factory=psycopg2.extras.RealDictCursor
+            ) as cursor:
+                cursor.execute(
+                    "UPDATE users SET password = %s WHERE user_id = %s;",
+                    [new_password, update_user_id],
+                )
+                connection.commit()
     except psycopg2.Error as error:
         error_message = error.diag.message_primary
         if "EMail已存在" in error_message:

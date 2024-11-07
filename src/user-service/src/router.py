@@ -1,6 +1,13 @@
 from fastapi import APIRouter, Depends, Request
-from schemas import RegisterRequest, LoginRequest, TokenResponse, RegisterResponse, User
-from services.user import register, login, get_user_profile
+from schemas import (
+    RegisterRequest,
+    LoginRequest,
+    TokenResponse,
+    RegisterResponse,
+    User,
+    ResetPasswordRequest,
+)
+from services.user import register, login, get_user_profile, reset_password
 from utils import verify_jwt_token
 
 router = APIRouter()
@@ -29,8 +36,8 @@ async def register_user(user: RegisterRequest):
 
 
 @router.post("/user/forgot_password", tags=["users"])
-async def forgot_user_password(user):
-    return "ok"
+async def forgot_user_password(token: str, new_password: str):
+    return reset_password(token, new_password)
 
 
 @privtate_router.get("/user/me", tags=["users"], response_model=User)
@@ -41,10 +48,12 @@ async def get_user(request: Request):
 
 
 @privtate_router.post("/user/change_password", tags=["users"])
-async def change_password(user):
+async def change_password():
     return "ok"
 
 
 @privtate_router.post("/user/reset_password", tags=["users"])
-async def reset_password(token: str, new_password: str):
-    return reset_password(token, new_password)
+async def reset_user_password(request: Request, body: ResetPasswordRequest):
+    update_user_id = request.state.payload["sub"]
+    new_password = body.new_password
+    reset_password(update_user_id, new_password)

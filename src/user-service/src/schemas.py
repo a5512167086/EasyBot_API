@@ -26,6 +26,14 @@ class TokenResponse(BaseModel):
     token_type: str
 
 
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+
+class ResetPasswordRequest(BaseModel):
+    new_password: str
+
+
 class ErrorResponse(BaseModel):
     error_code: str
     error_message: str
