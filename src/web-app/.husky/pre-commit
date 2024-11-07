@@ -1,2 +1,0 @@
-cd ./src/web-app
-npx lint-staged
