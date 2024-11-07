@@ -1,14 +1,40 @@
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import { SignInPage } from '@/pages/SignInPage'
-import { SignUpPage } from '@/pages/SignUpPage'
-import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage'
 import { BaseWrapper } from '@/components/BaseWrapper'
-import { OAuthCallback } from '@/pages/OAuthCallbackPage/OAuthCallback'
-import { ModulePage } from '@/pages/ModulePage'
-import { NotFoundPage } from '@/pages/NotFoundPage'
-import { Homepage } from '@/pages/Homepage'
 
+const SignInPage = lazy(() =>
+  import('@/pages/SignInPage').then((module) => ({
+    default: module.SignInPage
+  }))
+)
+const SignUpPage = lazy(() =>
+  import('@/pages/SignUpPage').then((module) => ({
+    default: module.SignUpPage
+  }))
+)
+const ForgotPasswordPage = lazy(() =>
+  import('@/pages/ForgotPasswordPage').then((module) => ({
+    default: module.ForgotPasswordPage
+  }))
+)
+const OAuthCallback = lazy(() =>
+  import('@/pages/OAuthCallbackPage/OAuthCallback').then((module) => ({
+    default: module.OAuthCallback
+  }))
+)
+const ModulePage = lazy(() =>
+  import('@/pages/ModulePage').then((module) => ({
+    default: module.ModulePage
+  }))
+)
+const NotFoundPage = lazy(() =>
+  import('@/pages/NotFoundPage').then((module) => ({
+    default: module.NotFoundPage
+  }))
+)
+const Homepage = lazy(() =>
+  import('@/pages/Homepage').then((module) => ({ default: module.Homepage }))
+)
 const BotPage = lazy(() =>
   import('@/pages/BotPage').then((module) => ({ default: module.BotPage }))
 )
