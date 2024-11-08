@@ -13,6 +13,8 @@ from exception import GlobalErrorException
 import bcrypt
 import jwt
 import requests
+import secrets
+import string
 
 
 def hash_password(password):
@@ -52,7 +54,7 @@ def verify_jwt_token(
         )
 
 
-def exchange_code_for_token(code):
+def google_code_to_token(code):
     token_url = "https://oauth2.googleapis.com/token"
     data = {
         "client_id": GOOGLE_CLIENT_ID,
@@ -71,3 +73,22 @@ def exchange_code_for_token(code):
         return {"access_token": access_token, "id_token": id_token}
     else:
         return "OAUTH_FAILED"
+
+
+def get_google_oauth_info(access_token):
+    user_info_url = "https://www.googleapis.com/oauth2/v1/userinfo"
+    headers = {"Authorization": f"Bearer {access_token}"}
+
+    response = requests.get(user_info_url, headers=headers)
+
+    if response.status_code == 200:
+        user_info = response.json()
+        return user_info
+    else:
+        return "USER_INFO_REQUEST_FAILED"
+
+
+def generate_random_password(length=12):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = "".join(secrets.choice(characters) for _ in range(length))
+    return password

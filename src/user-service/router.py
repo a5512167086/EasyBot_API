@@ -15,8 +15,9 @@ from services.user import (
     get_user_profile,
     reset_password,
     forgot_password,
+    oauth_login,
 )
-from utils import verify_jwt_token, exchange_code_for_token
+from utils import verify_jwt_token
 
 router = APIRouter()
 privtate_router = APIRouter(dependencies=[Depends(verify_jwt_token)])
@@ -33,9 +34,9 @@ async def login_user(user: LoginRequest):
 
 
 @router.post("/user/oauth_login", tags=["user"])
-async def oauth_login(body: OAuthLoginRequest):
-    code = body.code
-    return exchange_code_for_token(code)
+async def user_oauth_login(body: OAuthLoginRequest):
+    oauth_login(body)
+    return ""
 
 
 @router.post("/user/register", tags=["users"], response_model=RegisterResponse)

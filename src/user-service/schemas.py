@@ -1,4 +1,5 @@
 from pydantic import BaseModel, EmailStr
+from typing import Literal
 
 
 class User(BaseModel):
@@ -36,6 +37,13 @@ class ResetPasswordRequest(BaseModel):
 
 class OAuthLoginRequest(BaseModel):
     code: str
+    provider: Literal["google", "line"]
+
+
+class OAuth(BaseModel):
+    user_id: str
+    oauth_provider: Literal["google", "line"]
+    oauth_user_id: str
 
 
 class ErrorResponse(BaseModel):

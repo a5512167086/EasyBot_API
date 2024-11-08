@@ -1,5 +1,6 @@
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from exception import GlobalErrorException
 from config import FRONTEND_URL, EMAIL, EMAIL_APP_PASSWORD
 import smtplib
 
@@ -26,6 +27,8 @@ def send_reset_email(email: str, token: str):
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
             server.login(EMAIL, EMAIL_APP_PASSWORD)
             server.sendmail(EMAIL, email, msg.as_string())
-        print("Password reset email sent successfully.")
     except Exception as e:
-        print(f"Failed to send email: {e}")
+        raise GlobalErrorException(
+            error_code="EMAIL_SERVICE_FAILED",
+            error_message="Can't send email.",
+        )
