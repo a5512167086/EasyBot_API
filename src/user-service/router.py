@@ -33,7 +33,7 @@ async def login_user(user: LoginRequest):
     return jwt
 
 
-@router.post("/user/oauth_login", tags=["user"], response_model=TokenResponse)
+@router.post("/user/oauth_login", tags=["users"], response_model=TokenResponse)
 async def user_oauth_login(body: OAuthLoginRequest):
     return oauth_login(body)
 
@@ -55,11 +55,6 @@ async def get_user(request: Request):
     user_id = request.state.payload["sub"]
     user_profile = get_user_profile(user_id)
     return user_profile
-
-
-@privtate_router.post("/user/change_password", tags=["users"])
-async def change_password():
-    return "ok"
 
 
 @privtate_router.post("/user/reset_password", tags=["users"])
