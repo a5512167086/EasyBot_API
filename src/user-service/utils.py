@@ -88,6 +88,22 @@ def get_google_oauth_info(access_token):
         return "USER_INFO_REQUEST_FAILED"
 
 
+def authenticate_with_google(oauth_code):
+    google_oauth_response = google_code_to_token(oauth_code)
+    if google_oauth_response == "OAUTH_FAILED":
+        raise GlobalErrorException(
+            "OAUTH_FAILED", "Failed to authenticate with Google OAuth."
+        )
+
+    google_user_info = get_google_oauth_info(google_oauth_response["access_token"])
+    if google_user_info == "USER_INFO_REQUEST_FAILED":
+        raise GlobalErrorException(
+            "OAUTH_FAILED", "Failed to retrieve user info from Google."
+        )
+
+    return google_user_info
+
+
 def generate_random_password(length=12):
     characters = string.ascii_letters + string.digits + string.punctuation
     password = "".join(secrets.choice(characters) for _ in range(length))

@@ -8,8 +8,7 @@ from schemas import (
 from utils import (
     hash_password,
     create_jwt_token,
-    google_code_to_token,
-    get_google_oauth_info,
+    authenticate_with_google,
     generate_random_password,
 )
 from commands.user import create_user, update_user_password
@@ -19,6 +18,7 @@ from queries.user import (
     get_user_by_id,
     get_user_by_email,
 )
+from queries.oauth import get_oauth_by_oauth_user_id
 from services.mail import send_reset_email
 from exception import GlobalErrorException
 from datetime import timedelta
@@ -61,48 +61,60 @@ def login(user: LoginRequest):
     return {"token": access_token, "token_type": "bearer"}
 
 
+def handle_new_oauth_user(google_user_info, provider):
+    random_password = generate_random_password()
+    hashed_password = hash_password(random_password)
+    new_user = RegisterRequest(
+        username=google_user_info["name"],
+        email=google_user_info["email"],
+        password=hashed_password,
+    )
+    new_user_id = create_user(new_user)
+    oauth_data = OAuth(
+        user_id=new_user_id,
+        oauth_provider=provider,
+        oauth_user_id=google_user_info["id"],
+    )
+    create_oauth(oauth_data)
+    access_token = create_jwt_token(
+        data={"sub": new_user_id, "email": google_user_info["email"]}
+    )
+    return {"token": access_token, "token_type": "bearer"}
+
+
+def handle_existed_oauth_user(provider: str, oauth_user_id: str):
+    oauth_data = get_oauth_by_oauth_user_id(provider, oauth_user_id)
+
+    if oauth_data != "OAUTH_NOT_EXISTS" and oauth_data is not None:
+        user_data = get_user_by_id(oauth_data["user_id"])
+        if user_data != "USER_NOT_EXISTS":
+            access_token = create_jwt_token(
+                data={"sub": oauth_data["user_id"], "email": user_data["email"]}
+            )
+            return {"token": access_token, "token_type": "bearer"}
+    return "USER_ALREADY_EXISTS"
+
+
 def oauth_login(oauth: OAuthLoginRequest):
-    provider = oauth.provider
-    if provider == "google":
-        code = oauth.code
-        google_oauth_response = google_code_to_token(code)
-        if google_oauth_response == "OAUTH_FAILED":
+    google_user_info = authenticate_with_google(oauth.code)
+    google_email = google_user_info["email"]
+    user_info = get_user_by_email(google_email)
+
+    if user_info == "USER_NOT_EXISTS":
+        return handle_new_oauth_user(google_user_info, oauth.provider)
+    elif user_info:
+        oauth_user_info = handle_existed_oauth_user(
+            oauth.provider, google_user_info["id"]
+        )
+        if oauth_user_info == "USER_ALREADY_EXISTS":
             raise GlobalErrorException(
-                error_code="OAUTH_FAILED",
-                error_message="Failed to authenticate with Google OAuth.",
+                "USER_ALREADY_EXISTS", "User already exists, please login."
             )
-        google_user_info = get_google_oauth_info(google_oauth_response["access_token"])
-        if google_user_info == "USER_INFO_REQUEST_FAILED":
-            raise GlobalErrorException(
-                error_code="OAUTH_FAILED",
-                error_message="Failed to authenticate with Google OAuth.",
-            )
-        google_oauth_id = google_user_info["id"]
-        google_email = google_user_info["email"]
-        google_username = google_user_info["name"]
-        user_info = get_user_by_email(google_email)
-        if user_info == "USER_NOT_EXISTS":
-            new_user = RegisterRequest(
-                **{
-                    "username": google_username,
-                    "email": google_email,
-                    "password": hash_password(generate_random_password()),
-                }
-            )
-            new_user_id = create_user(new_user)
-            oauth = OAuth(
-                **{
-                    "user_id": new_user_id,
-                    "oauth_provider": provider,
-                    "oauth_user_id": google_oauth_id,
-                }
-            )
-            create_oauth(oauth)
-        elif user_info:
-            raise GlobalErrorException(
-                error_code="USER_EXISTED",
-                error_message="User already exists, please login.",
-            )
+        return oauth_user_info
+    else:
+        raise GlobalErrorException(
+            "USER_LOOKUP_FAILED", "Failed to retrieve user information."
+        )
 
 
 def register(user: RegisterRequest):

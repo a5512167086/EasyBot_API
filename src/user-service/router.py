@@ -33,10 +33,9 @@ async def login_user(user: LoginRequest):
     return jwt
 
 
-@router.post("/user/oauth_login", tags=["user"])
+@router.post("/user/oauth_login", tags=["user"], response_model=TokenResponse)
 async def user_oauth_login(body: OAuthLoginRequest):
-    oauth_login(body)
-    return ""
+    return oauth_login(body)
 
 
 @router.post("/user/register", tags=["users"], response_model=RegisterResponse)
