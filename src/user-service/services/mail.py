@@ -2,26 +2,26 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from exception import GlobalErrorException
 from config import FRONTEND_URL, EMAIL, EMAIL_APP_PASSWORD
+from jinja2 import Template
 import smtplib
+import os
 
 
-# 使用 smtplib 發送密碼重設電子郵件
 def send_reset_email(email: str, token: str):
-    reset_link = f"http://{FRONTEND_URL}/reset-password?token={token}"
-    email_content = f"""
-    您好，
+    reset_link = f"{FRONTEND_URL}/reset-password?token={token}"
 
-    請點擊以下連結重設您的密碼：{reset_link}
+    file_path = os.path.join(
+        os.path.dirname(__file__), "..", "templates", "password-reset.html"
+    )
+    with open(file_path, "r", encoding="utf-8") as file:
+        template = Template(file.read())
+        email_content = template.render(action_url=reset_link)
 
-    該連結將在 15 分鐘後過期。
-    """
-
-    # 設置郵件信息
-    msg = MIMEMultipart()
+    msg = MIMEMultipart("alternative")
     msg["From"] = EMAIL
     msg["To"] = email
     msg["Subject"] = "Easybot - 重設您的使用者密碼"
-    msg.attach(MIMEText(email_content, "plain"))
+    msg.attach(MIMEText(email_content, "html"))
 
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
